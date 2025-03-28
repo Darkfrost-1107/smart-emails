@@ -1,46 +1,18 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
-    /* Codec pro */
-    @font-face {
-      font-family: 'Codec Pro';
-      src: url('https://berylliumdev.com//fonts/codec-pro/CodecPro-Regular.ttf') format('truetype');
-    }
-
-    /* Agrandir Narrow */
-    @font-face {
-      font-family: 'Agrandir Narrow';
-      src: url('https://berylliumdev.com//fonts/Agrandir-Font-Family/Agrandir-TextBold.otf') format('opentype');
-    }
-
-    
-    /* TT Hoves */
-    @font-face {
-      font-family: 'TT Hoves';
-      src: url('https://berylliumdev.com//fonts/tt_hoves_pro/TT Hoves Pro Trial Thin.ttf') format('truetype');
-    }
-
     .be-email * {
       font-family: 'Codec Pro', 'Code Pro', monospace;
       font-optical-sizing: auto;
       font-weight: bold;
-      transition: all 0.3s ease;
     }
 
     .be-email .banner {
       width: 100%;
     }
 
-    .be-email .be-icon {
-      width: 22%; position:absolute; bottom: -27%; right: 6%
-    }
-
     .be-icon img {
       width: 100%
-    }
-
-    .be-email .be-icon:hover {
-      width: 25%; position:absolute; bottom: -29.5%; right: 4.5%
     }
 
     .be-email > .header {
@@ -73,28 +45,6 @@
       width: 50%;
     }
 
-    .be-email *:hover.zoom {
-      transform: scale(105%);
-    }
-
-    .be-email *:hover.down {
-      transform: translate(0px, 10%);
-    } 
-
-    .be-email *:hover.shine {
-      animation: 1s shine cubic-bezier(0.81, 0.135, 0.15, 0.86)
-    }
-
-    @keyframes shine {
-      0%, 100% {
-        filter: brightness(1)
-      }
-
-      30% {
-        filter: brightness(1.5)
-      }
-    }
-
     .be-email .body {
       display: flex; justify-content: center; align-items: center; margin: 2% 0
     }
@@ -125,8 +75,9 @@
     }
 
     .be-email .footer * {
-      font-family: 'TT Hoves';
       letter-spacing: 1px;
+      color: white; 
+
     }
 
     .footer > .info {
@@ -146,34 +97,31 @@
 <div class="be-email">
   <!-- Header -->
    <div class="header">
-    <img class="banner" src="https://berylliumdev.com//images/Header.png"/>
-     <a class="be-icon" href="https://berylliumdev.com/">
-      <img src="https://berylliumdev.com//images/Beryllium_Icon.png"/>
-     </a>
+    <img class="banner" src="https://berylliumdev.com/images/es/Header.png"/>
    </div>
    <div style='font-family: "Agrandir Narrow", monospace; font-weight: 900; color: #4d7af4; font-size: 6vw; max-width: 70%; margin: 0 5%'>
-    ESTIMADO [EMPRESA]
+    HOLA [EMPRESA]
    </div>
    <p class='be-text'>
     Es un placer presentarles a Beryllium Development Company, una empresa especializada en desarrollo de software a medida, seguridad informática e infraestructura tecnológica. Nuestro propósito es brindar soluciones innovadoras que optimicen la gestión, refuercen la seguridad de la información y mejoren la eficiencia operativa de organizaciones como la suya.
    </p>
-   <div class="be-services">
-     <img class="down" src="https://berylliumdev.com//images/_Services_Button_.png"/>
-   </div>
+   <a class="be-services" href="https://berylliumdev.com/#services">
+     <img class="down" src="https://berylliumdev.com//images/es/_Services_Button_.png"/>
+   </a>
   <!-- Body -->
    <div class="body">
-    <img src="https://berylliumdev.com//images/Body.png" class="zoom"/>
+    <img src="https://berylliumdev.com/images/es/Body.png" class="zoom"/>
    </div>
    <p class="be-text">
-   Adjuntamos nuestro <span class="shine"> brochure corporativo </span> , donde encontrarán más detalles sobre nuestra experiencia y soluciones. Nos gustaría coordinar una reunión para explorar posibles oportunidades de colaboración. <br />
+   Adjuntamos nuestro <span> brochure corporativo </span> , donde encontrarán más detalles sobre nuestra experiencia y soluciones. Nos gustaría coordinar una reunión para explorar posibles oportunidades de colaboración. <br />
    Quedamos atentos a su confirmación y agradecemos su tiempo e interés.
   </p>
    <a class="be-brochure" href="https://drive.google.com/file/d/1Gba-aaVUsFkg16B2y3-E4F78nJEr_05W/view?usp=sharing">
-    <img src="https://berylliumdev.com//images/_Button_.png" class="zoom shine" />
+    <img src="https://berylliumdev.com/images/es/_Button_.png" />
    </a>
   <!-- Footer -->
-  <div class="footer" style="font-family: 'TT Hoves';">
-    <div class="info" >
+  <div class="footer">
+    <!-- <div class="info" >
       <div class="admin" style="width: 40%;">
         <p>
           Atentamente,
@@ -190,13 +138,13 @@
       </div>
       <div style="display:flex; flex-direction: column; gap: 2%; justify-content: center; width: 50.5%; font-size:120%">
         <div style="display: flex; column-gap: 2%; align-items: center; justify-content: left">
-          <img src="https://berylliumdev.com//images/Phone_Icon.png" style="width:7.5%"/>
+          <img src="https://berylliumdev.com/images/misc/Phone_Icon.png" style="width:7.5%"/>
           <p style="margin: 0%">
             (+51) 974 444 461
           </p>
         </div>
         <div style="display: flex; column-gap: 2%; align-items: center; justify-content: left">
-          <img src="https://berylliumdev.com//images/Email_Icon.png" style="width:7.5%"/>
+          <img src="https://berylliumdev.com//images/misc/Email_Icon.png" style="width:7.5%"/>
           <p style="margin: 0%">
             administracion@berylliumdev.com
           </p>
@@ -209,44 +157,171 @@
           </p>
         </div>
         <div style="display: flex; column-gap: 2%; align-items: center; justify-content: left">
-          <img src="https://berylliumdev.com//images/RUC_Icon.png" style="width:7.5%"/>
+          <img src="https://berylliumdev.com/images/misc/RUC_Icon.png" style="width:7.5%"/>
           <p style="margin: 0%">
             RUC: 20607340642
           </p>
         </div>
         <div style="display: flex; column-gap: 2%; align-items: center; justify-content: left">
-          <img src="https://berylliumdev.com//images/Person_Icon.png" style="width:7.5%"/>
+          <img src="https://berylliumdev.com/images/misc/Person_Icon.png" style="width:7.5%"/>
           <p style="margin: 0%">
             Razón Social: <br/>
             Beryllium Development Company SAC
           </p>
         </div>
       </div>
-    </div>
-      <p>
+    </div> -->
+    <table cellpadding="0" cellspacing="0" style="width: 100%; font-family: Arial, sans-serif;">
+      <tbody>
+        <tr>
+          <td style="width: 41.5%; vertical-align: center;">
+            <p style="margin: 0; text-align: left;">
+              Atentamente,
+            </p>
+            <p style="margin: 10px 0; font-size: 320%; line-height: 1.2;">
+              Hiroshi Andre Chalco Peñafiel
+            </p>
+            <p style="margin: 0;">
+              Gerente General
+            </p>
+          </td>
+          <td style="width: 0.5%; background-color: white;"></td>
+          <td style="width: 2.5%; background-color: black;"></td>
+
+          <td style="width: 47.5%; vertical-align: middle;">
+            <table cellpadding="5" cellspacing="0" style="width: 100%;">
+              <tr>
+                <td style="width: 10%; vertical-align: middle;">
+                  <img src="https://berylliumdev.com/images/misc/Phone_Icon.png" style="width: 35px; height: auto;" alt="Teléfono"/>
+                </td>
+                <td style="width: 90%; vertical-align: middle; font-size: 120%;">
+                  (+51) 974 444 461
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 10%; vertical-align: middle; ">
+                  <img src="https://berylliumdev.com/images/misc/Email_Icon.png" style="width: 35px; height: auto;" alt="Email"/>
+                </td>
+                <td style="width: 90%; vertical-align: middle; font-size: 120%;">
+                  administracion@berylliumdev.com
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 10%; vertical-align: middle;">
+                  <img src="https://berylliumdev.com/images/Location_Icon.png" style="width: 35px; height: auto;" alt="Ubicación"/>
+                </td>
+                <td style="width: 90%; vertical-align: middle; font-size: 120%;">
+                  Calle Hipólito Unanue N°125,<br>
+                  Urb Victoria, Cercado - Arequipa
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 10%; vertical-align: middle;">
+                  <img src="https://berylliumdev.com/images/misc/RUC_Icon.png" style="width: 35px; height: auto;" alt="RUC"/>
+                </td>
+                <td style="width: 90%; vertical-align: middle; font-size: 120%;">
+                  RUC: 20607340642
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 10%; vertical-align: middle;">
+                  <img src="https://berylliumdev.com/images/misc/Person_Icon.png" style="width: 35px; height: auto;" alt="Razón Social"/>
+                </td>
+                <td style="width: 90%; vertical-align: middle; font-size: 120%;">
+                  Razón Social:<br>
+                  Beryllium Development Company SAC
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <!-- <p>
         Visitanos en nuestra web:
       </p>
-      <img class="zoom" src="https://berylliumdev.com//images/_Web_Button_.png" style="width:20%; border-radius: 12.5%/50%;">
+      <img class="zoom" src="https://berylliumdev.com/images/es/_Web_Button_.png" style="width:20%; border-radius: 12.5%/50%;">
       <p>
         Síguenos en nuestras redes sociales:
       </p>
       <div style="display: flex; justify-content: space-between; width: 40%">
         <a class="zoom" style="width: 15% " href="https://www.facebook.com/BerylliumDevCom/">
-          <img src="https://berylliumdev.com//images/Facebook_Icon.png" style="width: 100% ">
+          <img src="https://berylliumdev.com/images/misc/Facebook_Icon.png" style="width: 100% ">
         </a>
         <a class="zoom" style="width: 15% " href="https://www.tiktok.com/@berylliumcompany?lang=es">
-          <img src="https://berylliumdev.com//images/Tiktok_Icon.png" style="width: 100% ">
+          <img src="https://berylliumdev.com/images/misc/Tiktok_Icon.png" style="width: 100% ">
         </a>
         <a class="zoom" style="width: 15% " href="https://www.instagram.com/berylliumcompany/?locale=es&hl=en">
-          <img src="https://berylliumdev.com//images/Instagram_Icon.png" style="width: 100% ">
+          <img src="https://berylliumdev.com/images/misc/Instagram_Icon.png" style="width: 100% ">
         </a>
         <a class="zoom" style="width: 15% " href="https://www.youtube.com/@BerylliumDevelopmentCompany">
-          <img src="https://berylliumdev.com//images/Youtube_Icon.png" style="width: 100% ">
+          <img src="https://berylliumdev.com/images/misc/Youtube_Icon.png" style="width: 100% ">
         </a>
       </div>
-    <img src="https://berylliumdev.com//images/Beryllium_Logo.png" style="width: 20%; margin: 2% 0% 0%"/>
+    <img src="https://berylliumdev.com/images/misc/Beryllium_Logo.png" style="width: 20%; margin: 2% 0% 0%"/>
     <p style="font-family: 'Codec Pro';">
       www.berylliumdev.com
-    </p>
+    </p> -->
+    <table cellpadding="0" cellspacing="0" style="width: 100%; background-color: black; color: white; text-align: center; font-family: Arial, sans-serif; padding: 20px;">
+      <tr>
+        <td style="text-align: center; padding-bottom: 15px;">
+          <p style="margin: 0; font-size: 16px;">Visitanos en nuestra web:</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding-bottom: 20px;">
+          <a href="https://berylliumdev.com" style="color: black; text-decoration: none; font-weight: bold; text-align: center;">
+            <img src="https://berylliumdev.com/images/es/_Web_Button_.png" style="width:30%; border-radius: 12.5%/50%;">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+          <p style="margin: 0; font-size: 16px;">Síguenos en nuestras redes sociales:</p>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center; padding-bottom: 20px;">
+          <table cellpadding="0" cellspacing="30, 10" style="display: inline-block;">
+            <tr>
+              <td>
+                <a href="https://www.facebook.com/BerylliumDevCom">
+                  <img src="https://berylliumdev.com/images/misc/Facebook_Icon.png" alt="Facebook" style="width: 60px; height: 60px;"/>
+                </a>
+              </td>
+              <td>
+                <a href="https://www.tiktok.com/@berylliumcompany">
+                  <img src="https://berylliumdev.com/images/misc/Tiktok_Icon.png" alt="TikTok" style="width: 60px; height: 60px;"/>
+                </a>
+              </td>
+              <td>
+                <a href="https://www.instagram.com/berylliumcompany/">
+                  <img src="https://berylliumdev.com/images/misc/Instagram_Icon.png" alt="Instagram" style="width: 60px; height: 60px;"/>
+                </a>
+              </td>
+              <td>
+                <a href="https://www.youtube.com/@BerylliumDevelopmentCompany">
+                  <img src="https://berylliumdev.com/images/misc/Youtube_Icon.png" alt="YouTube" style="width: 60px; height: 60px;"/>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+          <table cellpadding="0" cellspacing="0" style="display: inline-block;">
+            <tr>
+              <td style="text-align: center;">
+                <img src="https://berylliumdev.com/images/misc/Beryllium_Logo.png" style="width: 60%; margin: 2% 0% 0%"/>
+                <p>
+                  www.berylliumdev.com
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
