@@ -11,7 +11,7 @@ def draft_message_body(subject: str, html_content: str, attachments: list):
         'subject': subject,
         'body': {
             'contentType': 'HTML',
-            'content': html_content.replace("{empresa}", "algo")
+            'content': html_content.replace("[EMPRESA]", "GABO")
             },
         'toRecipients': [
             {
@@ -22,6 +22,11 @@ def draft_message_body(subject: str, html_content: str, attachments: list):
             {
                 'emailAddress': {
                     'address': 'danielmarronc@gmail.com'
+                }
+            },
+            {
+                'emailAddress': {
+                    'address': 'gbernedok@unsa.edu.pe'
                 }
             }
         ],
