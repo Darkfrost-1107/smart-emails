@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     CLIENT_SECRET: str = os.getenv("CLIENT_SECRET", "")
     TENANT_ID: str = os.getenv("TENANT_ID", "consumers")
     SCOPES: list = ["Mail.ReadWrite", "Mail.Send", "User.Read"]
-    
+    BASE_DIR: Path = BASE_DIR
     # Configuración de CORS
     CORS_ORIGINS: list = ["*"]
     

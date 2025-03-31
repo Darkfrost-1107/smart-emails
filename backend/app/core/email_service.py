@@ -115,6 +115,7 @@ class EmailService:
             'toRecipients': to_recipients,
             'importance': email_data.importance
         }
+        print(  message)
         
         if cc_recipients:
             message['ccRecipients'] = cc_recipients
