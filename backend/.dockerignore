@@ -33,7 +33,7 @@ ENV/
 # Logs y datos
 logs/*
 !logs/.gitkeep
-refresh_token.txt
+
 
 # Adjuntos subidos
 attachments/*

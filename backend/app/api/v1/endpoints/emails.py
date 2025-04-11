@@ -1,9 +1,10 @@
 import json
 import logging
 import base64
-from typing import List, Optional
-from fastapi import APIRouter, Body, Depends, File, Form, HTTPException, UploadFile, BackgroundTasks
+from typing import List, Optional, Dict, Any
+from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks
 from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 from app.schemas.email import EmailRequest, EmailResponse, EmailRecipient, Attachment
 from app.core.email_service import EmailService
@@ -12,6 +13,16 @@ from app.api.deps import get_email_service, get_template_service, get_auth_heade
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+class TemplateEmailRequest(BaseModel):
+    template_name: str
+    subject: str
+    to_recipients: str  # Lista de emails separados por coma
+    cc_recipients: Optional[str] = None
+    bcc_recipients: Optional[str] = None
+    importance: str = "normal"
+    template_variables: Optional[Dict[str, Any]] = None
+    attachments: Optional[List[Attachment]] = None
 
 @router.post("/send", response_model=EmailResponse)
 async def send_email(
@@ -48,15 +59,8 @@ async def send_email(
 
 @router.post("/send-template", response_model=EmailResponse)
 async def send_template_email(
+    email_request: TemplateEmailRequest,
     background_tasks: BackgroundTasks,
-    template_name: str = Form(...),
-    subject: str = Form(...),
-    to_recipients: str = Form(...),  # Lista de emails separados por coma
-    cc_recipients: Optional[str] = Form(None),
-    bcc_recipients: Optional[str] = Form(None),
-    importance: str = Form("normal"),
-    template_variables: Optional[str] = Form(None),  # JSON como string
-    files: List[UploadFile] = File(None),
     email_service: EmailService = Depends(get_email_service),
     template_service: TemplateService = Depends(get_template_service),
     headers: dict = Depends(get_auth_headers)
@@ -71,65 +75,46 @@ async def send_template_email(
     - **bcc_recipients**: Lista de destinatarios en copia oculta (separados por coma, opcional)
     - **importance**: Importancia del correo ("low", "normal", "high")
     - **template_variables**: Variables para la plantilla en formato JSON (opcional)
-    - **files**: Archivos adjuntos (opcional)
+    - **attachments**: Lista de objetos Attachment con archivos codificados en Base64 (opcional)
     """
     try:
         # Verificar que la plantilla existe
         try:
-            template_content = template_service.get_template_content(template_name)
+            template_content = template_service.get_template_content(email_request.template_name)
         except FileNotFoundError:
-            raise HTTPException(status_code=404, detail=f"Plantilla '{template_name}' no encontrada")
+            raise HTTPException(status_code=404, detail=f"Plantilla '{email_request.template_name}' no encontrada")
         
         # Convertir listas de destinatarios
-        to_list = [EmailRecipient(email=email.strip()) for email in to_recipients.split(",")]
+        to_list = [EmailRecipient(email=email.strip()) for email in email_request.to_recipients.split(",")]
         
         cc_list = None
-        if cc_recipients:
-            cc_list = [EmailRecipient(email=email.strip()) for email in cc_recipients.split(",")]
+        if email_request.cc_recipients:
+            cc_list = [EmailRecipient(email=email.strip()) for email in email_request.cc_recipients.split(",")]
         
         bcc_list = None
-        if bcc_recipients:
-            bcc_list = [EmailRecipient(email=email.strip()) for email in bcc_recipients.split(",")]
-        
-        # Procesar variables de la plantilla
-        variables = {}
-        if template_variables:
-            try:
-                variables = json.loads(template_variables)
-            except json.JSONDecodeError:
-                raise HTTPException(status_code=400, detail="Error al decodificar variables JSON")
-        
-        # Procesar archivos adjuntos
-        attachments = []
-        if files:
-            for file in files:
-                content = await file.read()
-                attachments.append(Attachment(
-                    filename=file.filename,
-                    content_type=file.content_type,
-                    content=base64.b64encode(content).decode('utf-8')
-                ))
+        if email_request.bcc_recipients:
+            bcc_list = [EmailRecipient(email=email.strip()) for email in email_request.bcc_recipients.split(",")]
         
         # Aplicar variables a la plantilla
-        if variables:
-            for key, value in variables.items():
+        if email_request.template_variables:
+            for key, value in email_request.template_variables.items():
                 template_content = template_content.replace(f"{{{key}}}", str(value))
         
         # Crear solicitud de correo
-        email_request = EmailRequest(
-            subject=subject,
+        email_request_obj = EmailRequest(
+            subject=email_request.subject,
             body=template_content,
             body_type="HTML",
             to_recipients=to_list,
             cc_recipients=cc_list,
             bcc_recipients=bcc_list,
-            importance=importance,
-            attachments=attachments,
-            template_variables=variables
+            importance=email_request.importance,
+            attachments=email_request.attachments,
+            template_variables=email_request.template_variables
         )
         
         # Enviar correo
-        result = await email_service.send_email(email_request)
+        result = await email_service.send_email(email_request_obj)
         if not result.success:
             return JSONResponse(
                 status_code=500,
