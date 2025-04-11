@@ -5,7 +5,7 @@ services:
     build: .
     container_name: email-api
     ports:
-      - "8000:8000"
+      - "9800:8000"
     volumes:
       - ./templates:/app/templates
       - ./attachments:/app/attachments
