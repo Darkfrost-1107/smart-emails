@@ -9,8 +9,8 @@ from app.config import get_settings
 settings = get_settings()
 logger = logging.getLogger(__name__)
 
-class MSGraphAuth:
-    """Clase para manejar la autenticación con Microsoft Graph API"""
+class OutlookAuth:
+    """Clase para manejar la autenticación con Microsoft Graph API para Outlook"""
     
     def __init__(self):
         self.application_id = settings.APPLICATION_ID
