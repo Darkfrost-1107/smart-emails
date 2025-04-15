@@ -10,6 +10,7 @@ services:
       - ./templates:/app/templates
       - ./attachments:/app/attachments
       - ./logs:/app/logs
+      
     env_file:
       - .env
     restart: unless-stopped

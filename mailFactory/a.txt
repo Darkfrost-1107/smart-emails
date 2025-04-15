@@ -1,0 +1,22 @@
+1. Liberación y habilitación de números SIP
+Solicito la liberación y habilitación de los siguientes números dentro de la infraestructura SIP proporcionada:
+•	610973 - 610979
+•	610981 – 910985
+2. Documento con la configuración de la troncal SIP en FreePBX y Asterisk
+Solicito un documento en PDF con la configuración detallada de la troncal SIP en FreePBX y Asterisk, incluyendo:
+• Configuración en FreePBX
+•	Acceder a "Trunks" en FreePBX.
+•	Crear una nueva troncal SIP (chan_pjsip).
+•	Ingresar los siguientes datos:
+  o	Usuario SIP
+  o	Contraseña
+  o	Servidor SIP
+  o	Puerto
+  o	Método de autenticación
+•	Configurar rutas entrantes y salientes.
+•	Realizar pruebas de llamadas para validar el funcionamiento.
+3. Configuración en Asterisk
+•	Configuración en consola en los archivos sip.conf y extensions.conf.
+4. Habilitar una nueva IP Publica
+Se habilitó a través de NAT una IP Publica (192.168.0.216 -> 190.116.40.50)
+• Se requiere habilitar otra IP Publica (192.168.0.217 -> 190.116.40.51)
