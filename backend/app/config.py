@@ -20,16 +20,25 @@ LOGS_DIR.mkdir(exist_ok=True)
 
 class Settings(BaseSettings):
     # Información de la aplicación
-    APP_NAME: str = "API de Envío de Correos"
+    APP_NAME: str = "Beryllium"
     API_V1_STR: str = "/api"
-    VERSION: str = "1.0.0"
+    VERSION: str = "1.0.5"
     DESCRIPTION: str = "Backend para envío de correos utilizando Microsoft Graph API"
-    
+    # Variables generales
+    EMAIL_PROVIDER: str = os.getenv("EMAIL_PROVIDER", "titan")
     # Microsoft Graph API
     MS_GRAPH_ENDPOINT: str = "https://graph.microsoft.com/v1.0"
     APPLICATION_ID: str = os.getenv("APPLICATION_ID", "")
     CLIENT_SECRET: str = os.getenv("CLIENT_SECRET", "")
     TENANT_ID: str = os.getenv("TENANT_ID", "consumers")
+
+
+    # Titan Email
+    TITAN_SMTP_SERVER: str = "smtp.titan.email"
+    TITAN_SMTP_PORT: int = 587
+    TITAN_SENDER_EMAIL: str = os.getenv("SENDER_EMAIL", "")
+    TITAN_SENDER_PASSWORD: str = os.getenv("SENDER_PASSWORD", "")
+
     SCOPES: list = ["Mail.ReadWrite", "Mail.Send", "User.Read"]
     BASE_DIR: Path = BASE_DIR
     # Configuración de CORS
