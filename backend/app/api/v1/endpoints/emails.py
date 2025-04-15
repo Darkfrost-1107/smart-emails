@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from app.schemas.email import EmailRequest, EmailResponse, EmailRecipient, Attachment
 from app.core.email_service import EmailService
 from app.core.template_service import TemplateService
-from app.api.deps import get_email_service, get_template_service, get_auth_headers
+from app.api.deps import get_email_service, get_template_service
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -28,8 +28,8 @@ class TemplateEmailRequest(BaseModel):
 async def send_email(
     email_data: EmailRequest,
     background_tasks: BackgroundTasks,
-    email_service: EmailService = Depends(get_email_service),
-    headers: dict = Depends(get_auth_headers)
+    email_service: EmailService = Depends(get_email_service)
+    # headers: dict = Depends(get_auth_headers)
 ):
     """
     Envía un correo electrónico con todos los parámetros especificados.
@@ -62,8 +62,8 @@ async def send_template_email(
     email_request: TemplateEmailRequest,
     background_tasks: BackgroundTasks,
     email_service: EmailService = Depends(get_email_service),
-    template_service: TemplateService = Depends(get_template_service),
-    headers: dict = Depends(get_auth_headers)
+    template_service: TemplateService = Depends(get_template_service)
+    #headers: dict = Depends(get_auth_headers)
 ):
     """
     Envía un correo utilizando una plantilla HTML con variables.

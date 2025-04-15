@@ -1,7 +1,6 @@
 from fastapi import Depends, HTTPException
 from typing import Dict
 
-from app.core.auth import MSGraphAuth
 from app.core.email_service import EmailService
 from app.core.template_service import TemplateService
 from app.core.attachment_service import AttachmentService
@@ -12,21 +11,21 @@ _email_service = None
 _template_service = None
 _attachment_service = None
 
-def get_auth_service() -> MSGraphAuth:
-    """Obtiene el servicio de autenticación como dependencia"""
-    global _auth_service
-    if _auth_service is None:
-        _auth_service = MSGraphAuth()
-    return _auth_service
+# def get_auth_service() ->EmailService:
+#     """Obtiene el servicio de autenticación como dependencia"""
+#     global _auth_service
+#     if _auth_service is None:
+#         _auth_service = EmailService()
+#     return _auth_service
 
-def get_auth_headers(auth_service: MSGraphAuth = Depends(get_auth_service)) -> Dict[str, str]:
-    """Obtiene los encabezados de autenticación como dependencia"""
-    try:
-        return auth_service.get_auth_headers()
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error de autenticación: {str(e)}")
+# def get_auth_headers(auth_service: EmailService = Depends(get_auth_service)) -> Dict[str, str]:
+#     """Obtiene los encabezados de autenticación como dependencia"""
+#     try:
+#         return auth_service.get_auth_headers()
+#     except HTTPException:
+#         raise
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Error de autenticación: {str(e)}")
 
 def get_email_service() -> EmailService:
     """Obtiene el servicio de correo como dependencia"""
