@@ -11,24 +11,44 @@ def draft_message_body(subject: str, html_content: str, attachments: list):
         'subject': subject,
         'body': {
             'contentType': 'HTML',
-            'content': html_content.replace("[EMPRESA]", "GABO")
+            'content': html_content.replace("[EMPRESA]", "<> Beryllium <>")
             },
         'toRecipients': [
             {
                 'emailAddress': {
-                    'address': 'marrondaniel20@gmail.com'
+                    'address': 'gabrielalbertokb@outlook.com'
                 }
             },
-            {
-                'emailAddress': {
-                    'address': 'danielmarronc@gmail.com'
-                }
-            },
+            # {
+            #     'emailAddress': {
+            #         'address': 'marrondaniel20@gmail.com'
+            #     }
+            # },
+            # {
+            #     'emailAddress': {
+            #         'address': 'danielmarronc@gmail.com'
+            #     }
+            # },
             {
                 'emailAddress': {
                     'address': 'gbernedok@unsa.edu.pe'
                 }
-            }
+            },
+            #  {
+            #     'emailAddress': {
+            #         'address': 'hchalco@unsa.edu.pe'
+            #     }
+            # },
+            # {
+            #     'emailAddress': {
+            #         'address': 'spacori@unsa.edu.pe'
+            #     }
+            # },
+            # {
+            #     'emailAddress': {
+            #         'address': 'administracion@berylliumdev.com'
+            #     }
+            # }
         ],
         'ccRecipients': [
             {
@@ -65,7 +85,8 @@ def main():
         empresa = "Mi Empresa S.A."  # Valor que reemplazará {empresa}
 
         # Leer el template HTML desde el archivo
-        with open("beryllium-email.html", "r", encoding="utf-8") as file:
+        with open("test.html", "r", encoding="utf-8") as file:
+        # with open("beryllium-email.html", "r", encoding="utf-8") as file:
             html_template = file.read()
 
         # Reemplazar la variable en el template
@@ -73,7 +94,7 @@ def main():
 
         endpoint = f'{MS_GRAPH_ENDPOINT}/me/sendMail'
         message = draft_message_body(
-            subject='Test Email',
+            subject='Bienvenida a Beryllium',
             html_content=html_content,
             attachments=attachments
         )
