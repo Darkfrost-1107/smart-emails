@@ -1,5 +1,6 @@
 "use client"
 
+import { ComboBox } from "@/components/ui/combobox";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,7 +45,11 @@ export function useComponentForm(
       action(values)
     })
 
-  const FileField = useCallback(() => {
+  type FileFieldProps = {
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  }
+
+  const FileField = useCallback(({onChange}: FileFieldProps) => {
     return (
       <FormField 
         control={form.control}
@@ -54,14 +59,21 @@ export function useComponentForm(
             <FormLabel> Archivo Excel :</FormLabel>
             <FormMessage />
             <FormControl>
-              <Input type="file" {...fileRef}/>
+              <Input type="file" {...fileRef} onChange={(event) => {
+                fileRef.onChange(event).then(() => onChange(event))
+              }}/>
             </FormControl>
           </FormItem>
         }
       />
     )
   }, [form, fileRef])
-  const NameColumnField = useCallback(() => {
+
+  type ColumnInputType = {
+    columns: string[],
+  }
+
+  const NameColumnField = useCallback(({columns}: ColumnInputType) => {
     return (
       <FormField
         control={form.control}
@@ -71,7 +83,11 @@ export function useComponentForm(
             <FormLabel> Columna de Empresas :</FormLabel>
             <FormMessage />
             <FormControl>
-              <Input {...field}/>
+              <ComboBox {...field} dataList={columns.map((element) => ({
+                  label: element,
+                  value: element,
+                })
+              )}/>
             </FormControl>
           </FormItem>
         }
@@ -79,7 +95,7 @@ export function useComponentForm(
     )
   },[form])
 
-  const EmailColumnField = useCallback(() => {
+  const EmailColumnField = useCallback(({columns}: ColumnInputType) => {
     return (
       <FormField
         control={form.control}
@@ -89,7 +105,11 @@ export function useComponentForm(
             <FormLabel> Columna de Emails :</FormLabel>
             <FormMessage />
             <FormControl>
-              <Input {...field} />
+              <ComboBox {...field} dataList={columns.map((element) => ({
+                  label: element,
+                  value: element,
+                })
+              )}/>
             </FormControl>
           </FormItem>
         }
@@ -97,7 +117,7 @@ export function useComponentForm(
     )
   },[form])
 
-  const TemplateColumnField = useCallback(() => {
+  const TemplateColumnField = useCallback(({columns}: ColumnInputType) => {
     return (
       <FormField
         control={form.control}
@@ -107,7 +127,11 @@ export function useComponentForm(
             <FormLabel> Columna de Plantillas :</FormLabel>
             <FormMessage />
             <FormControl>
-              <Input {...field} />
+            <ComboBox {...field} dataList={columns.map((element) => ({
+                  label: element,
+                  value: element,
+                })
+              )}/>
             </FormControl>
           </FormItem>
         }

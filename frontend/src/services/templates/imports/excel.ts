@@ -39,7 +39,7 @@ type RowData = {
 
 export function useExportExcel() {
   const data = useRef<RowData[]>([]);
-  const columns = useRef<CellValue[]>([]);
+  const columns = useRef<string[]>([]);
   const loading= useRef(false);
   const [fileName, setFileName] = useState('');
 
@@ -63,9 +63,9 @@ export function useExportExcel() {
       const worksheet = workbook.worksheets[0];
       
       // Extraer las columnas (encabezados)
-      const cols: CellValue[] = [];
+      const cols: string[] = [];
       worksheet.getRow(1).eachCell((cell) => {
-        cols.push(cell.value);
+        cols.push(cell.value?.toString() ?? '');
       });
       columns.current = cols
       
@@ -76,7 +76,7 @@ export function useExportExcel() {
         if (rowNumber > 1) {
           const rowData: RowData = {};
           row.eachCell((cell, colNumber) => {
-            rowData[cols[colNumber - 1]?.toString() ?? ''] = cell.value;
+            rowData[cols[colNumber - 1]] = cell.value;
           });
           rows.push(rowData);
         }

@@ -11,7 +11,7 @@ import { sendEmails } from '../../../service/send'
 
 export default function DataDiplay() {
   
-  const {data, importData} = useColumns()
+  const {data, importData, setData} = useColumns()
   const {Component: ImportExcel, toogle} = useImportExcel(importData)
 
   return (
@@ -23,8 +23,8 @@ export default function DataDiplay() {
           </Text>
           <div className='flex gap-2 items-center'>
             <Button
-              onClick={() => {
-                sendEmails(data)
+              onClick={async () => {
+                setData(await sendEmails(data) || [])
                 console.log('Enviado Exitosamente') 
               }}
             >

@@ -13,7 +13,9 @@ type Recipient = {
   recipent_email: string
 }
 
-export type EmailWithRecipient = EmailType & Recipient
+export type EmailWithRecipient = EmailType & Recipient & {
+  status?: "success" | "error" | "pending"
+}
 
 export const columns : ColumnDef<EmailWithRecipient>[] = [
   {
@@ -27,6 +29,24 @@ export const columns : ColumnDef<EmailWithRecipient>[] = [
   {
     accessorKey: "name",
     header: "Plantilla",
+  },
+  {
+    accessorKey: "status",
+    header: "Estado",
+    cell: ({row}) => {
+      return (
+        <div className="flex items-center space-x-2">
+          { row.getValue("status") === "success" ? 
+            <span className="text-green-500">Enviado</span> :
+            row.getValue("status") === "error" ?
+            <span className="text-red-500">Error</span> :
+            // row.getValue("status") === "pending" ?
+            // <span className="text-yellow-500">Pendiente</span> :
+            <span className="text-gray-500">Sin Enviar</span>
+          }
+        </div>
+      )
+    }
   }
 ]
 
@@ -46,5 +66,6 @@ export function useColumns() {
   return {
     data, 
     importData,
+    setData,
   }
 }

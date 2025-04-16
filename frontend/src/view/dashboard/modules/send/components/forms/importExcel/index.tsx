@@ -1,5 +1,5 @@
 import { Form } from '@/components/ui/form'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { useComponentForm } from './inputs'
 import { useExportExcel } from '@/services/templates/imports/excel'
@@ -11,7 +11,15 @@ interface ImportExcelFormProps {
 
 export default function ImportExcelForm({onHandleSubmit}: ImportExcelFormProps) {
    // 1. Define your form.
-  const {handleFileUpload, data} = useExportExcel()
+  const {handleFileUpload, data, columns, fileName} = useExportExcel()
+
+  const [cols, setCols] = React.useState<string[]>([])
+  const [refresh, setRefresh] = React.useState(false)
+
+  useEffect(() => {
+    console.log("columns", columns.current)
+    setCols(columns.current)
+  }, [fileName, columns, refresh])
 
   const {form, onSubmit,
     components: {
@@ -20,19 +28,17 @@ export default function ImportExcelForm({onHandleSubmit}: ImportExcelFormProps) 
       TemplateColumnField,
       FileField,
     }
-  } = useComponentForm(async ({file, nameColumn, emailColumn, templateColumn}) => {
-    console.log("accepted file", file)
-    await handleFileUpload(file?.[0])
+  } = useComponentForm(async ({nameColumn, emailColumn, templateColumn}) => {
 
     console.log("imported data", data)
-    const exportData = data.current.map((row) => ({
+    const exportData : EmailWithRecipient[] = data.current.map((row) => ({
       recipent_name: row[nameColumn]?.toString() || "",
       recipent_email: row[emailColumn]?.toString() || "",
       name: row[templateColumn]?.toString() || "",
+      status: "pending",
     }))
   
     onHandleSubmit(exportData)
-
   }) 
  
   // 2. Define a submit handler.  
@@ -40,10 +46,15 @@ export default function ImportExcelForm({onHandleSubmit}: ImportExcelFormProps) 
   return (
     <Form {...form}>
       <form onSubmit={onSubmit} className="space-y-4">
-        <FileField />
-        <NameColumnField />
-        <EmailColumnField />
-        <TemplateColumnField />
+        <FileField onChange={async (event) => {
+          if(event.target.files != null){
+            await handleFileUpload(event.target.files[0])
+            setRefresh(!refresh)
+          }
+        }}/>
+        <NameColumnField columns={cols}/>
+        <EmailColumnField columns={cols}/>
+        <TemplateColumnField columns={cols}/>
         <Button type="submit">Importar</Button>
       </form>
     </Form>   
